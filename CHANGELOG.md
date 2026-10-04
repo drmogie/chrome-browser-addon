@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026.10.04.06
+
+- Chrome Browser: new options `dns_server`, `dark_mode`, `screen_width`, `screen_height`.
+
 ## 2026.10.04.05
 
 - Chrome Browser: now built on `jlesage/chromium` (smaller, fixes the blank viewer). One web port, 3011.

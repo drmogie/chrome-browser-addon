@@ -26,6 +26,9 @@ To change this, use the **proxy_server** option, or run a VPN on the server.
 - **username** and **password**: Optional login for the web page. Set both or neither.
 - **start_url**: Page to open when the browser starts.
 - **proxy_server**: Send all traffic through a proxy. Example: `http://172.16.1.5:3128`.
+- **dns_server**: Force the DNS server the browser uses. Example: `172.16.1.2`. Use spaces or commas for more than one. Empty uses Home Assistant DNS. Only this add-on is changed.
+- **dark_mode**: Dark look for the browser. Off by default.
+- **screen_width / screen_height**: Size of the browser screen. Default 1920 by 1080. Smaller is faster.
 - **extra_chrome_flags**: More Chromium flags. Keep `--no-sandbox` and `--disable-dev-shm-usage`.
 - **ssl**: Use HTTPS for the web page. On by default. Login and clipboard need it.
 

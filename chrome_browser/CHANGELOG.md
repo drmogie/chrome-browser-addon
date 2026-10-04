@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026.10.04.06
+
+- New option `dns_server`: force the DNS server for this add-on. Empty by default.
+- New option `dark_mode` (off by default).
+- New options `screen_width` and `screen_height` (default 1920 by 1080).
+
 ## 2026.10.04.05
 
 - Switched the base image to `jlesage/chromium` (about 380 MB, down from over 1 GB).

@@ -18,6 +18,10 @@ START_URL="$(opt start_url)"
 PROXY="$(opt proxy_server)"
 FLAGS="$(opt extra_chrome_flags)"
 SSL="$(opt ssl)"
+DNS="$(opt dns_server)"
+DARK="$(opt dark_mode)"
+SCREEN_W="$(opt screen_width)"
+SCREEN_H="$(opt screen_height)"
 
 [ -n "$TZ_VALUE" ] && export TZ="$TZ_VALUE"
 
@@ -28,6 +32,26 @@ if [ "$SSL" = "false" ]; then
 else
   export SECURE_CONNECTION=1
   SCHEME=https
+fi
+
+# Dark mode for the browser (off by default).
+[ "$DARK" = "true" ] && export DARK_MODE=1
+
+# Screen size of the browser window. Empty = image default (1920x1080).
+[ -n "$SCREEN_W" ] && export DISPLAY_WIDTH="$SCREEN_W"
+[ -n "$SCREEN_H" ] && export DISPLAY_HEIGHT="$SCREEN_H"
+
+# Optional DNS server(s). Space or comma separated. Empty = use Home Assistant DNS.
+if [ -n "$DNS" ]; then
+  RESOLV=""
+  for ns in $(echo "$DNS" | tr ',' ' '); do
+    RESOLV="${RESOLV}nameserver ${ns}\n"
+  done
+  if printf "$RESOLV" > /etc/resolv.conf 2>/dev/null; then
+    echo "[chrome_browser] DNS forced to: $DNS"
+  else
+    echo "[chrome_browser] WARNING: could not set DNS to $DNS. Using Home Assistant DNS."
+  fi
 fi
 
 # Optional web page login. Both must be set.
@@ -48,6 +72,6 @@ ARGS="$FLAGS"
 [ -n "$START_URL" ] && ARGS="$ARGS $START_URL"
 export CHROMIUM_CUSTOM_ARGS="$ARGS"
 
-echo "[chrome_browser] Starting. Time zone: ${TZ:-default}. Proxy: ${PROXY:-none}. Web page: $SCHEME on container port 5800."
+echo "[chrome_browser] Starting. Time zone: ${TZ:-default}. Proxy: ${PROXY:-none}. DNS: ${DNS:-default}. Dark mode: ${DARK:-false}. Web page: $SCHEME on container port 5800."
 
 exec /init

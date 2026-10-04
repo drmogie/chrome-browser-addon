@@ -61,3 +61,7 @@
   otherwise, which add-ons do not give by default).
 - Old saved options (`wayland`) and old ports (3000/3001) may log warnings.
 - NOT tested end to end. Check on arc-ha.
+
+## 2026.10.04.06
+- Added dns_server (writes /etc/resolv.conf in run.sh, empty by default), dark_mode (DARK_MODE env), screen_width/screen_height (DISPLAY_WIDTH/HEIGHT).
+- Sandbox banner choice (--test-type vs SYS_ADMIN) still open.
