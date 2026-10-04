@@ -1,0 +1,35 @@
+name: Chrome Browser
+version: "2026.10.04.01"
+slug: chrome_browser
+description: A Chromium browser you use from a web page, running on your Home Assistant server
+url: https://github.com/drmogie/chrome-browser-addon
+arch:
+  - amd64
+  - aarch64
+init: false
+startup: application
+boot: auto
+ports:
+  3000/tcp: 3000
+  3001/tcp: 3001
+ports_description:
+  3000/tcp: Browser web page (HTTP)
+  3001/tcp: Browser web page (HTTPS, self-signed)
+webui: https://[HOST]:[PORT:3001]
+map:
+  - addon_config:rw
+panel_icon: mdi:google-chrome
+options:
+  timezone: "America/Los_Angeles"
+  username: ""
+  password: ""
+  start_url: ""
+  proxy_server: ""
+  extra_chrome_flags: "--disable-dev-shm-usage"
+schema:
+  timezone: str
+  username: str?
+  password: password?
+  start_url: str?
+  proxy_server: str?
+  extra_chrome_flags: str?
