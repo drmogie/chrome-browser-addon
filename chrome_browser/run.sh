@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 # Reads the Home Assistant add-on options and turns them into the
-# environment variables that linuxserver/chromium understands.
+# environment variables that jlesage/chromium understands.
 # Then it hands over to the image's own start program (/init).
 set -e
 
@@ -17,32 +17,37 @@ PASS_VALUE="$(opt password)"
 START_URL="$(opt start_url)"
 PROXY="$(opt proxy_server)"
 FLAGS="$(opt extra_chrome_flags)"
-WAYLAND="$(opt wayland)"
+SSL="$(opt ssl)"
 
 [ -n "$TZ_VALUE" ] && export TZ="$TZ_VALUE"
-export PUID=0 PGID=0
-export TITLE="Chrome Browser"
+
+# HTTPS for the web page. On by default.
+if [ "$SSL" = "false" ]; then
+  export SECURE_CONNECTION=0
+  SCHEME=http
+else
+  export SECURE_CONNECTION=1
+  SCHEME=https
+fi
 
 # Optional web page login. Both must be set.
 if [ -n "$USER_VALUE" ] && [ -n "$PASS_VALUE" ]; then
-  export CUSTOM_USER="$USER_VALUE"
-  export PASSWORD="$PASS_VALUE"
+  export WEB_AUTHENTICATION=1
+  export WEB_AUTHENTICATION_USERNAME="$USER_VALUE"
+  export WEB_AUTHENTICATION_PASSWORD="$PASS_VALUE"
 fi
 
-# Display mode. The image defaults to Wayland, which can give a blank
-# screen on some hardware. X11 is the safer default here.
-if [ "$WAYLAND" = "true" ]; then
-  export PIXELFLUX_WAYLAND=true
-else
-  export PIXELFLUX_WAYLAND=false
-fi
+# Chromium needs --no-sandbox here. Add it if the saved flags lack it.
+case " $FLAGS " in
+  *" --no-sandbox "*) ;;
+  *) FLAGS="--no-sandbox $FLAGS" ;;
+esac
 
-# Build the Chromium command line flags.
-CLI="$FLAGS"
-[ -n "$PROXY" ] && CLI="$CLI --proxy-server=$PROXY"
-[ -n "$START_URL" ] && CLI="$CLI $START_URL"
-export CHROME_CLI="$CLI"
+ARGS="$FLAGS"
+[ -n "$PROXY" ] && ARGS="$ARGS --proxy-server=$PROXY"
+[ -n "$START_URL" ] && ARGS="$ARGS $START_URL"
+export CHROMIUM_CUSTOM_ARGS="$ARGS"
 
-echo "[chrome_browser] Starting. Time zone: ${TZ:-default}. Proxy: ${PROXY:-none}. Wayland: ${PIXELFLUX_WAYLAND}."
+echo "[chrome_browser] Starting. Time zone: ${TZ:-default}. Proxy: ${PROXY:-none}. Web page: $SCHEME on container port 5800."
 
 exec /init

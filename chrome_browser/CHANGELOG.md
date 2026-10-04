@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026.10.04.05
+
+- Switched the base image to `jlesage/chromium` (about 380 MB, down from over 1 GB).
+- The old `linuxserver/chromium` image showed a blank viewer on arc-ha.
+- One web port now: host 3011 -> container 5800. Port 3010 is gone.
+- New option `ssl` (on by default). Removed the `wayland` option.
+- `--no-sandbox` is always added to the Chromium flags.
+- If you have old port settings, use Reset to defaults in the Network box.
+
 ## 2026.10.04.04
 
 - New option `wayland` (off by default). The browser viewer showed a blank screen with the image's default Wayland mode. X11 mode is used instead.

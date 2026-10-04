@@ -1,5 +1,5 @@
 name: Chrome Browser
-version: "2026.10.04.04"
+version: "2026.10.04.05"
 slug: chrome_browser
 image: ghcr.io/drmogie/{arch}-addon-chrome-browser
 description: A Chromium browser you use from a web page, running on your Home Assistant server
@@ -11,12 +11,12 @@ init: false
 startup: application
 boot: auto
 ports:
-  3000/tcp: 3010
-  3001/tcp: 3011
+  5800/tcp: 3011
+  5900/tcp: null
 ports_description:
-  3000/tcp: Browser web page (HTTP). Host port 3010
-  3001/tcp: Browser web page (HTTPS, self-signed). Host port 3011
-webui: https://[HOST]:[PORT:3001]
+  5800/tcp: Browser web page. Host port 3011
+  5900/tcp: VNC client port (optional, off by default)
+webui: "[PROTO:ssl]://[HOST]:[PORT:5800]"
 map:
   - addon_config:rw
 panel_icon: mdi:google-chrome
@@ -26,8 +26,8 @@ options:
   password: ""
   start_url: ""
   proxy_server: ""
-  extra_chrome_flags: "--disable-dev-shm-usage"
-  wayland: false
+  extra_chrome_flags: "--no-sandbox --disable-dev-shm-usage"
+  ssl: true
 schema:
   timezone: str
   username: str?
@@ -35,4 +35,4 @@ schema:
   start_url: str?
   proxy_server: str?
   extra_chrome_flags: str?
-  wayland: bool?
+  ssl: bool?

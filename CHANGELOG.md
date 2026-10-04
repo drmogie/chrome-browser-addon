@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026.10.04.05
+
+- Chrome Browser: now built on `jlesage/chromium` (smaller, fixes the blank viewer). One web port, 3011.
+
 ## 2026.10.04.04
 
 - Chrome Browser: new `wayland` option, off by default, to fix a blank viewer.

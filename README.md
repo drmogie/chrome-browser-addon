@@ -9,7 +9,7 @@ Run a Chromium browser on your Home Assistant server and use it from a web page.
 
 ## Add-ons
 
-- **Chrome Browser** (`chrome_browser`): Chromium in a web page, built on `linuxserver/chromium`.
+- **Chrome Browser** (`chrome_browser`): Chromium in a web page, built on `jlesage/chromium`.
 
 ## Install
 
@@ -25,7 +25,7 @@ The browser uses the Home Assistant server's network. See the add-on Docs tab.
 
 ## Credits
 
-Built on [linuxserver/chromium](https://github.com/linuxserver/docker-chromium).
+Built on [jlesage/chromium](https://github.com/jlesage/docker-chromium).
 
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [license-shield]: https://img.shields.io/badge/License-MIT-yellow.svg

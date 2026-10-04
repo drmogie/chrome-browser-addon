@@ -47,3 +47,17 @@
   (default false) that sets `PIXELFLUX_WAYLAND`.
 - NOT confirmed this fixes it. Other suspects: /dev/shm is 64MB (add-ons cannot
   set shm_size); start_url http://172.16.1.50:7575 may not load from arc-ha.
+
+## 2026-10-04: switched to jlesage/chromium (2026.10.04.05)
+
+- linuxserver/chromium (Selkies + Wayland, 1 GB+) gave a blank viewer on arc-ha
+  even with PIXELFLUX_WAYLAND=false. Chromium was running; the display was not.
+- jlesage/chromium: ~376 MB arm64, ~391 MB amd64 (Docker Hub, 2026-10-04).
+  Web on 5800, VNC 5900 (not exposed). Env: TZ, WEB_AUTHENTICATION(_USERNAME/_PASSWORD),
+  SECURE_CONNECTION, CHROMIUM_CUSTOM_ARGS, USER_ID/GROUP_ID.
+- Host port 3011 -> container 5800. `webui` uses `[PROTO:ssl]` so the link
+  follows the `ssl` option.
+- `--no-sandbox` is always added in run.sh (sandbox needs SYS_ADMIN/seccomp
+  otherwise, which add-ons do not give by default).
+- Old saved options (`wayland`) and old ports (3000/3001) may log warnings.
+- NOT tested end to end. Check on arc-ha.
