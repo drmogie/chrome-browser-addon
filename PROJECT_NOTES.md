@@ -36,3 +36,14 @@
 - `webui` still uses `[PORT:3001]`, which Supervisor turns into the mapped host port.
 - Mogie reported the browser "still trying 3001" even though HA showed 3011.
   Not yet confirmed what was opening 3001 (Open Web UI link vs a typed address).
+
+## 2026-10-04: blank viewer (2026.10.04.04)
+
+- On arc-ha the Selkies sidebar showed but no browser. Chromium WAS running
+  (ps showed chromium as root with --no-sandbox, Seccomp 0). Container name is
+  `app_f686ecb0_chrome_browser` (not `addon_`).
+- Latest linuxserver/chromium is Selkies + Wayland (KasmVNC branch is deprecated).
+  Wayland can give a black screen on some hardware. Added option `wayland`
+  (default false) that sets `PIXELFLUX_WAYLAND`.
+- NOT confirmed this fixes it. Other suspects: /dev/shm is 64MB (add-ons cannot
+  set shm_size); start_url http://172.16.1.50:7575 may not load from arc-ha.

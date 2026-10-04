@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026.10.04.04
+
+- New option `wayland` (off by default). The browser viewer showed a blank screen with the image's default Wayland mode. X11 mode is used instead.
+- Fixed reading `false` option values in `run.sh`.
+
 ## 2026.10.04.03
 
 - Default host ports moved to 3010 (HTTP) and 3011 (HTTPS). Port 3001 clashed with another service on arc-ha.

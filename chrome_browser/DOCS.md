@@ -27,6 +27,7 @@ To change this, use the **proxy_server** option, or run a VPN on the server.
 - **start_url**: Page to open when the browser starts.
 - **proxy_server**: Send all traffic through a proxy. Example: `http://172.16.1.5:3128`.
 - **extra_chrome_flags**: More Chromium flags. Keep `--disable-dev-shm-usage`.
+- **wayland**: Off by default (uses X11). The image's newer Wayland mode can show a blank screen on some hardware. Turn it on to try it.
 
 ## Saved data
 

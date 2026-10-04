@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026.10.04.04
+
+- Chrome Browser: new `wayland` option, off by default, to fix a blank viewer.
+
 ## 2026.10.04.03
 
 - Chrome Browser: default host ports now 3010 (HTTP) and 3011 (HTTPS).

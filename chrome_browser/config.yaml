@@ -1,5 +1,5 @@
 name: Chrome Browser
-version: "2026.10.04.03"
+version: "2026.10.04.04"
 slug: chrome_browser
 image: ghcr.io/drmogie/{arch}-addon-chrome-browser
 description: A Chromium browser you use from a web page, running on your Home Assistant server
@@ -27,6 +27,7 @@ options:
   start_url: ""
   proxy_server: ""
   extra_chrome_flags: "--disable-dev-shm-usage"
+  wayland: false
 schema:
   timezone: str
   username: str?
@@ -34,3 +35,4 @@ schema:
   start_url: str?
   proxy_server: str?
   extra_chrome_flags: str?
+  wayland: bool?
