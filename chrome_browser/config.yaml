@@ -1,6 +1,7 @@
 name: Chrome Browser
-version: "2026.10.04.01"
+version: "2026.10.04.02"
 slug: chrome_browser
+image: ghcr.io/drmogie/{arch}-addon-chrome-browser
 description: A Chromium browser you use from a web page, running on your Home Assistant server
 url: https://github.com/drmogie/chrome-browser-addon
 arch:
