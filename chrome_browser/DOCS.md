@@ -5,9 +5,9 @@ You use it through a web page.
 
 ## How to open it
 
-- Click **Open Web UI**, or go to `https://<your-ha-ip>:3001`.
+- Click **Open Web UI**, or go to `https://<your-ha-ip>:3011`.
 - The page uses a self-signed certificate. Your browser will warn you once.
-- Port 3000 is plain HTTP. Use it only if you must.
+- Port 3010 is plain HTTP. Use it only if you must.
 
 ## Which network does it use?
 
@@ -36,7 +36,7 @@ They stay after a restart or update.
 ## Safety
 
 - Set a username and password if the port is reachable by other people.
-- Do not expose ports 3000 or 3001 to the internet without a login.
+- Do not expose ports 3010 or 3011 to the internet without a login.
 
 ## Credits
 

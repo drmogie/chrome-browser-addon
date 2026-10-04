@@ -1,5 +1,5 @@
 name: Chrome Browser
-version: "2026.10.04.02"
+version: "2026.10.04.03"
 slug: chrome_browser
 image: ghcr.io/drmogie/{arch}-addon-chrome-browser
 description: A Chromium browser you use from a web page, running on your Home Assistant server
@@ -11,11 +11,11 @@ init: false
 startup: application
 boot: auto
 ports:
-  3000/tcp: 3000
-  3001/tcp: 3001
+  3000/tcp: 3010
+  3001/tcp: 3011
 ports_description:
-  3000/tcp: Browser web page (HTTP)
-  3001/tcp: Browser web page (HTTPS, self-signed)
+  3000/tcp: Browser web page (HTTP). Host port 3010
+  3001/tcp: Browser web page (HTTPS, self-signed). Host port 3011
 webui: https://[HOST]:[PORT:3001]
 map:
   - addon_config:rw

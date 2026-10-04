@@ -27,3 +27,12 @@
 - The GHCR package must be PUBLIC or Supervisor cannot pull it.
 - Release flow now: bump config.yaml version, push, create the Release,
   wait for the workflow, then update on HA.
+
+## 2026-10-04: default ports (2026.10.04.03)
+
+- arc-ha already used host port 3001. Supervisor showed a port conflict.
+- Defaults are now host 3010 -> container 3000 and host 3011 -> container 3001.
+- The container still listens on 3000/3001 (fixed by the linuxserver image).
+- `webui` still uses `[PORT:3001]`, which Supervisor turns into the mapped host port.
+- Mogie reported the browser "still trying 3001" even though HA showed 3011.
+  Not yet confirmed what was opening 3001 (Open Web UI link vs a typed address).
